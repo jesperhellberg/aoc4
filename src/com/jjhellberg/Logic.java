@@ -19,7 +19,6 @@ public class Logic {
         boolean valid;
         List<List<String>> rows = organizeInput(input);
 
-
         for (List<String> row : rows) {
             HashSet<String> tmp = new HashSet<>();
             valid = true;
@@ -33,7 +32,31 @@ public class Logic {
                 validRows++;
             }
         }
+        return validRows;
+    }
 
+    public int countNoAnagrams(String input) {
+        int validRows = 0;
+        boolean valid;
+        List<List<String>> rows = organizeInput(input);
+
+        for (List<String> row : rows) {
+            HashSet<String> tmp = new HashSet<>();
+            valid = true;
+            for (String word : row) {
+                char[] tmpWord = word.toCharArray();
+                Arrays.sort(tmpWord);
+                word = new String(tmpWord);
+
+                if (!tmp.add(word)) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                validRows++;
+            }
+        }
         return validRows;
     }
 }
